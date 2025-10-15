@@ -8,15 +8,14 @@ public class BiographyService {
 
     public static Biography addBookInput() {
             Biography biographyBook = new Biography();
-            System.out.println("Please, Enter The ID of book");
-            Integer bookId = scanner.nextInt();
-            while (HelperUtils.isNull(bookId) || bookId < 0 || checkIfBookIdIsExit(bookId)) {
-                System.out.println("This Book ID is already exits in out Records," +
+            System.out.println("Please, Enter The International Standard Book Number(ISBN) of book");
+            String bookISBN = scanner.nextLine();
+            while (HelperUtils.isNull(bookISBN) || HelperUtils.checkIfStrIsBlankOrEmpty(bookISBN) || checkIfBookISBNIsExit(bookISBN)) {
+                System.out.println("This Book ISBN is already exits in out Records," +
                         "Please Enter another ID");
-                bookId = scanner.nextInt();
+                bookISBN = scanner.nextLine();
             }
-            biographyBook.setId(bookId);
-            scanner.nextLine();
+            biographyBook.setiSBN(bookISBN);
             System.out.println("Please, Enter The subject Person of book");
             String bookSubjectPerson = scanner.nextLine();
             biographyBook.setSubjectPerson(bookSubjectPerson);
@@ -25,7 +24,7 @@ public class BiographyService {
             System.out.println("Please, Enter The chronological Scope of the book");
             String chronologicalScope = scanner.nextLine();
             while (HelperUtils.isNull(chronologicalScope) || HelperUtils.checkIfStrIsBlankOrEmpty(chronologicalScope)) {
-                System.out.println("Invalid Auother, Please write again");
+                System.out.println("Invalid Input, Please write again");
                 chronologicalScope = scanner.nextLine();
             }
             biographyBook.setChronologicalScope(chronologicalScope);
@@ -33,7 +32,7 @@ public class BiographyService {
             System.out.println("Please, Enter The primary Source Use of the book");
             String primarySourceUse = scanner.nextLine();
             while (HelperUtils.isNull(primarySourceUse) || HelperUtils.checkIfStrIsBlankOrEmpty(primarySourceUse)) {
-                System.out.println("Invalid publication Year, Please write again");
+                System.out.println("Invalid Input, Please write again");
                 primarySourceUse = scanner.nextLine();
             }
             biographyBook.setPrimarySourceUse(primarySourceUse);
@@ -96,8 +95,8 @@ public class BiographyService {
                     }
                     case 3 -> {
                         System.out.println("Enter the update primary Source Use");
-                        String chronologicalScope = scanner.nextLine();
-                        selectedBook.setChronologicalScope(chronologicalScope);
+                        String newPrimarySourceUse = scanner.nextLine();
+                        selectedBook.setPrimarySourceUse(newPrimarySourceUse);
                         System.out.println("primary Source Use updated successfully.");
                     }
                     case 4 -> {
@@ -119,7 +118,7 @@ public class BiographyService {
         }
 
         for (int i = 0; i < biographyBookList.size(); i++) {
-            if (biographyBookList.get(i).equals(updatedBook)) {
+            if (biographyBookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 biographyBookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;
@@ -173,23 +172,6 @@ public class BiographyService {
     }
 
 
-    public static Boolean checkIfBookTitleIsExit(String titleToCheck) {
-        for (Biography book : biographyBookList) {
-            if (book.getTitle().equals(titleToCheck)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static Boolean checkIfBookIdIsExit(Integer idToCheck) {
-        for (Biography book : biographyBookList) {
-            if (book.getId().equals(idToCheck)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public static Boolean checkIfBookISBNIsExit(String iSBNToCheck) {
         for (Biography book : biographyBookList) {

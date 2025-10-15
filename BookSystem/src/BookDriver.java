@@ -13,9 +13,9 @@ public class BookDriver {
             mainMenuOption = scanner.nextInt();
             scanner.nextLine();
             switch (mainMenuOption) {
-                case 1 -> BookService.addBookInput();
+                case 1 -> BookService.save(BookService.addBookInput());
                 case 2 -> BookService.editBookInput();
-                case 3 -> BookService.getBookToRemove();
+                case 3 -> BookService.remove(BookService.getBookToRemove());
                 case 4 -> BookService.displayAllBook();
                 case 5 -> {
                     System.out.println("Exiting the Book System");

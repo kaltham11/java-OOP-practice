@@ -11,13 +11,12 @@ public class MilitaryHistoryService {
         MilitaryHistory militaryHistorybook = new MilitaryHistory();
         System.out.println("Please, Enter The ISBN of book");
         String bookISBN = scanner.nextLine();
-        while (HelperUtils.isNull(bookISBN) || HelperUtils.checkIfStrIsBlankOrEmpty(bookISBN)) {
+        while (HelperUtils.isNull(bookISBN) || HelperUtils.checkIfStrIsBlankOrEmpty(bookISBN)||checkIfBookISBNIsExit(bookISBN)) {
             System.out.println("This Book ISBN is already exits in out Records," +
                     "Please Enter another ID");
             bookISBN = scanner.nextLine();
         }
         militaryHistorybook.setiSBN(bookISBN);
-        scanner.nextLine();
         System.out.println("Please, Enter The conflict Focus of book");
         String conflictFocus = scanner.nextLine();
         while (HelperUtils.isNull(conflictFocus) || HelperUtils.checkIfStrIsBlankOrEmpty(conflictFocus)) {
@@ -39,8 +38,8 @@ public class MilitaryHistoryService {
             System.out.println("Invalid Input, Please write again");
             strategicMapsIncluded = scanner.nextLine();
         }
-        Boolean hasstrategicMapsIncluded = Boolean.parseBoolean(strategicMapsIncluded);
-        militaryHistorybook.setStrategicMapsIncluded(hasstrategicMapsIncluded);
+        Boolean hasStrategicMapsIncluded = Boolean.parseBoolean(strategicMapsIncluded);
+        militaryHistorybook.setStrategicMapsIncluded(hasStrategicMapsIncluded);
 
         return militaryHistorybook;
     }
@@ -101,13 +100,14 @@ public class MilitaryHistoryService {
             case 3 -> {
                 System.out.println("Enter the update for is strategic Maps Included(True/False)");
                 String mapsIncluded = scanner.nextLine();
-                if (mapsIncluded.equalsIgnoreCase("true") && mapsIncluded.equalsIgnoreCase("false")) {
-                    Boolean isMapsIncluded = Boolean.parseBoolean(mapsIncluded);
-                    selectedBook.setStrategicMapsIncluded(isMapsIncluded);
-                    System.out.println("strategic Maps Included updated successfully");
+                while (!mapsIncluded.equalsIgnoreCase("true") && !mapsIncluded.equalsIgnoreCase("false")) {
+                    System.out.println("The input is invalid, please enter (true/false)");
+                    mapsIncluded = scanner.nextLine();
                 }
-                System.out.println("The input is invalid, please enter (true/false)");
-                mapsIncluded = scanner.nextLine();
+                Boolean isMapsIncluded = Boolean.parseBoolean(mapsIncluded);
+                selectedBook.setStrategicMapsIncluded(isMapsIncluded);
+                System.out.println("strategic Maps Included updated successfully");
+
 
             }
 
@@ -127,7 +127,7 @@ public class MilitaryHistoryService {
         }
 
         for (int i = 0; i < militaryHistoryBookList.size(); i++) {
-            if (militaryHistoryBookList.get(i).equals(updatedBook)) {
+            if (militaryHistoryBookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 militaryHistoryBookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;

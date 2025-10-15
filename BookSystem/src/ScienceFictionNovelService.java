@@ -12,8 +12,7 @@ public class ScienceFictionNovelService {
         System.out.println("Please, Enter The International Standard Book Number(ISBN) of book");
         String iSBN = scanner.nextLine();
         while (HelperUtils.isNull(iSBN) || HelperUtils.checkIfStrIsBlankOrEmpty(iSBN) || checkIfBookISBNIsExit(iSBN)) {
-            System.out.println("This Book ISBN is already exits in out Records," +
-                    "Please Enter another ISBN");
+            System.out.println("Invalid Input, please enter again");
             iSBN = scanner.nextLine();
         }
         scienceFictionNovelBook.setiSBN(iSBN);
@@ -100,13 +99,14 @@ public class ScienceFictionNovelService {
             case 3 -> {
                 System.out.println("Enter the update for scientific Plausibility(True/False)");
                 String scientificPlausibility = scanner.nextLine();
-                if (scientificPlausibility.equalsIgnoreCase("true") || scientificPlausibility.equalsIgnoreCase("false")) {
-                    Boolean isScientificPlausibility = Boolean.parseBoolean(scientificPlausibility);
-                    selectedBook.setScientificPlausibility(isScientificPlausibility);
-                    System.out.println("Scientific Plausibility updated successfully");
+                while (!scientificPlausibility.equalsIgnoreCase("true") && !scientificPlausibility.equalsIgnoreCase("false")) {
+                    System.out.println("The input is invalid, please enter (true/false)");
+                    scientificPlausibility = scanner.nextLine();
+
                 }
-                System.out.println("The input is invalid, please enter (true/false)");
-                scientificPlausibility = scanner.nextLine();
+                Boolean isScientificPlausibility = Boolean.parseBoolean(scientificPlausibility);
+                selectedBook.setScientificPlausibility(isScientificPlausibility);
+                System.out.println("Scientific Plausibility updated successfully");
 
             }
 
@@ -126,7 +126,7 @@ public class ScienceFictionNovelService {
         }
 
         for (int i = 0; i < scienceFictionBookList.size(); i++) {
-            if (scienceFictionBookList.get(i).equals(updatedBook)) {
+            if (scienceFictionBookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 scienceFictionBookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;

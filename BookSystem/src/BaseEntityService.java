@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,7 +65,6 @@ public class BaseEntityService {
         final String iSBNToRemove = removeISBN;
         Boolean removed = baseEntityList.removeIf(book -> book.getiSBN().equals(iSBNToRemove));
         if (removed) {
-            //book.setUpdatedDate();
             System.out.println("The the book is successfully removed");
 
         } else {

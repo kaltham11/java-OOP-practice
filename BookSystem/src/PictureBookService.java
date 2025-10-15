@@ -10,7 +10,7 @@ public class PictureBookService {
         PictureBook picturebook = new PictureBook();
         System.out.println("Please, Enter The ISBN of book");
         String bookISBN = scanner.nextLine();
-        while (HelperUtils.isNull(bookISBN) || HelperUtils.checkIfStrIsBlankOrEmpty(bookISBN)) {
+        while (HelperUtils.isNull(bookISBN) || HelperUtils.checkIfStrIsBlankOrEmpty(bookISBN) || checkIfBookISBNIsExit(bookISBN)) {
             System.out.println("Invalid Input,Please try Again");
             bookISBN = scanner.nextLine();
         }
@@ -34,8 +34,8 @@ public class PictureBookService {
 
         System.out.println("Please, Enter The word Count Per Page of book");
         Integer wordCountPerPage = scanner.nextInt();
-        while (HelperUtils.isNull(wordCountPerPage) || wordCountPerPage > 0) {
-            System.out.println("Invalied Input, Please write again");
+        while (HelperUtils.isNull(wordCountPerPage) || wordCountPerPage < 0) {
+            System.out.println("Invalid Input, Please write again");
             wordCountPerPage = scanner.nextInt();
         }
         picturebook.setWordCountPerPage(wordCountPerPage);
@@ -119,7 +119,7 @@ public class PictureBookService {
         }
 
         for (int i = 0; i < pictureBookList.size(); i++) {
-            if (pictureBookList.get(i).equals(updatedBook)) {
+            if (pictureBookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 pictureBookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;

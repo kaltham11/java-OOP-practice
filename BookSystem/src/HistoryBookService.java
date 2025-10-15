@@ -86,7 +86,7 @@ public class HistoryBookService {
                     case 1 -> {
                         System.out.println("Enter new historical Period of the book");
                         String historicalPeriod = scanner.nextLine();
-                        selectedBook.setiSBN(historicalPeriod);
+                        selectedBook.setHistoricalPeriod(historicalPeriod);
                         System.out.println("historical Period updated successfully.");
                     }
                     case 2 -> {
@@ -98,13 +98,14 @@ public class HistoryBookService {
                     case 3 -> {
                         System.out.println("Enter the update for includesMaps(True/False)");
                         String includesMaps = scanner.nextLine();
-                        if (includesMaps.equalsIgnoreCase("true") && includesMaps.equalsIgnoreCase("false")) {
-                            Boolean containsMaps = Boolean.parseBoolean(includesMaps);
-                            selectedBook.setIncludesMaps(containsMaps);
-                            System.out.println("is includes Maps updated successfully");
+                        while (!includesMaps.equalsIgnoreCase("true") && !includesMaps.equalsIgnoreCase("false")) {
+                            System.out.println("The input is invalid, please enter (true/false)");
+                            includesMaps = scanner.nextLine();
                         }
-                        System.out.println("The input is invalid, please enter (true/false)");
-                        includesMaps = scanner.nextLine();
+                        Boolean containsMaps = Boolean.parseBoolean(includesMaps);
+                        selectedBook.setIncludesMaps(containsMaps);
+                        System.out.println("is includes Maps updated successfully");
+
 
                     }
 
@@ -124,7 +125,7 @@ public class HistoryBookService {
         }
 
         for (int i = 0; i < historybookList.size(); i++) {
-            if (historybookList.get(i).equals(updatedBook)) {
+            if (historybookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 historybookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;

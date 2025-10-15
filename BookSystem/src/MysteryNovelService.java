@@ -28,7 +28,7 @@ public class MysteryNovelService {
             System.out.println("Please, Enter central Crime of book");
             String centralCrime = scanner.nextLine();
             while (HelperUtils.isNull(centralCrime) || HelperUtils.checkIfStrIsBlankOrEmpty(centralCrime)) {
-                System.out.println("Invalied Input, Please write again");
+                System.out.println("Invalid Input, Please write again");
                 centralCrime = scanner.nextLine();
             }
             mysteryNovelBook.setCentralCrime(centralCrime);
@@ -36,7 +36,7 @@ public class MysteryNovelService {
             System.out.println("Please, Enter The reveal Timing of book");
             String revealTiming = scanner.nextLine();
             while (HelperUtils.isNull(revealTiming) || HelperUtils.checkIfStrIsBlankOrEmpty(revealTiming)) {
-                System.out.println("Invalied Input, Please write again");
+                System.out.println("Invalid Input, Please write again");
                 revealTiming = scanner.nextLine();
             }
             mysteryNovelBook.setRevealTiming(revealTiming);
@@ -119,7 +119,7 @@ public class MysteryNovelService {
         }
 
         for (int i = 0; i < mysteryNovelBookList.size(); i++) {
-            if (mysteryNovelBookList.get(i).equals(updatedBook)) {
+            if (mysteryNovelBookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 mysteryNovelBookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;

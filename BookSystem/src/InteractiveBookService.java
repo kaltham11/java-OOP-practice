@@ -19,7 +19,7 @@ public class InteractiveBookService {
         System.out.println("Please, Enter iinteractive Element of book");
         String interactiveElement = scanner.nextLine();
         while (HelperUtils.isNull(interactiveElement) || HelperUtils.checkIfStrIsBlankOrEmpty(interactiveElement)) {
-            System.out.println("Invalied Input, Please write again");
+            System.out.println("Invalid Input, Please write again");
             interactiveElement = scanner.nextLine();
         }
         interactiveBook.setInteractiveElement(interactiveElement);
@@ -27,7 +27,7 @@ public class InteractiveBookService {
         System.out.println("Please, Enter sensory Engagement of book");
         String sensoryEngagement = scanner.nextLine();
         while (HelperUtils.isNull(sensoryEngagement) || HelperUtils.checkIfStrIsBlankOrEmpty(sensoryEngagement)) {
-            System.out.println("Invalied Input, Please write again");
+            System.out.println("Invalid Input, Please write again");
             sensoryEngagement = scanner.nextLine();
         }
         interactiveBook.setSensoryEngagement(sensoryEngagement);
@@ -35,11 +35,10 @@ public class InteractiveBookService {
         System.out.println("Please, Enter The durability Rating of book");
         String durabilityRating = scanner.nextLine();
         while (HelperUtils.isNull(durabilityRating) || HelperUtils.checkIfStrIsBlankOrEmpty(durabilityRating)) {
-            System.out.println("Invalied Input, Please write again");
+            System.out.println("Invalid Input, Please write again");
             durabilityRating = scanner.nextLine();
         }
         interactiveBook.setDurabilityRating(durabilityRating);
-        scanner.nextLine();
 
         return interactiveBook;
     }
@@ -119,7 +118,7 @@ public class InteractiveBookService {
         }
 
         for (int i = 0; i < interactiveBookList.size(); i++) {
-            if (interactiveBookList.get(i).equals(updatedBook)) {
+            if (interactiveBookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 interactiveBookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;

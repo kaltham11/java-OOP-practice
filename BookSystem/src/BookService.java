@@ -161,7 +161,7 @@ public class BookService {
         }
 
         for (int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).equals(updatedBook)) {
+            if (bookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 bookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;

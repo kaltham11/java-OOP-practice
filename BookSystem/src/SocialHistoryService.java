@@ -10,12 +10,11 @@ public class SocialHistoryService {
             SocialHistory socialHistorybook = new SocialHistory();
             System.out.println("Please, Enter The ISBN of book");
             String bookISBN = scanner.nextLine();
-            while (HelperUtils.isNull(bookISBN) || HelperUtils.checkIfStrIsBlankOrEmpty(bookISBN)) {
+            while (HelperUtils.isNull(bookISBN) || HelperUtils.checkIfStrIsBlankOrEmpty(bookISBN)||checkIfBookISBNIsExit(bookISBN)) {
                 System.out.println("Invalid Input,Please try Again");
                 bookISBN = scanner.nextLine();
             }
             socialHistorybook.setiSBN(bookISBN);
-            scanner.nextLine();
             System.out.println("Please, Enter cultural Focus of book");
             String culturalFocus= scanner.nextLine();
             while (HelperUtils.isNull(culturalFocus) || HelperUtils.checkIfStrIsBlankOrEmpty(culturalFocus)) {
@@ -117,7 +116,7 @@ public class SocialHistoryService {
         }
 
         for (int i = 0; i < socialHistoryBookList.size(); i++) {
-            if (socialHistoryBookList.get(i).equals(updatedBook)) {
+            if (socialHistoryBookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 socialHistoryBookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;

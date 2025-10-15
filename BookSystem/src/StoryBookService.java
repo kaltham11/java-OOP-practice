@@ -9,6 +9,13 @@ public class StoryBookService {
 
     public static StoryBook addBookInput() {
         StoryBook storyBook = new StoryBook();
+        System.out.println("Please, Enter The ISBN of book");
+        String bookISBN = scanner.nextLine();
+        while (HelperUtils.isNull(bookISBN) || HelperUtils.checkIfStrIsBlankOrEmpty(bookISBN)||checkIfBookISBNIsExit(bookISBN)) {
+            System.out.println("Invalid Input,Please try Again");
+            bookISBN = scanner.nextLine();
+        }
+        storyBook.setiSBN(bookISBN);
         System.out.println("Please, Enter The main Character of book");
         String mainChar = scanner.nextLine();
         while (HelperUtils.isNull(mainChar) || HelperUtils.checkIfStrIsBlankOrEmpty(mainChar)) {
@@ -100,7 +107,7 @@ public class StoryBookService {
             case 3 -> {
                 System.out.println("Enter the update for has Illustrations(True/False)");
                 String hasIllustrations = scanner.nextLine();
-                if (!hasIllustrations.equalsIgnoreCase("true") && !hasIllustrations.equalsIgnoreCase("false")) {
+                while (!hasIllustrations.equalsIgnoreCase("true") && !hasIllustrations.equalsIgnoreCase("false")) {
                     System.out.println("The input is invalid, please enter (true/false)");
                     hasIllustrations = scanner.nextLine();
                 }
@@ -133,7 +140,7 @@ public class StoryBookService {
         }
 
         for (int i = 0; i < storyBookList.size(); i++) {
-            if (storyBookList.get(i).equals(updatedBook)) {
+            if (storyBookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 storyBookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;

@@ -12,8 +12,7 @@ public class FableCollectionService {
         System.out.println("Please, Enter The International Standard Book Number(ISBN) of book");
         String iSBN = scanner.nextLine();
         while (HelperUtils.isNull(iSBN) || HelperUtils.checkIfStrIsBlankOrEmpty(iSBN) || checkIfBookISBNIsExit(iSBN)) {
-            System.out.println("This Book ISBN is already exits in out Records," +
-                    "Please Enter another ISBN");
+            System.out.println("Invalid Input,Please try Again");
             iSBN = scanner.nextLine();
         }
         fableCollectionBook.setiSBN(iSBN);
@@ -100,7 +99,7 @@ public class FableCollectionService {
             case 3 -> {
                 System.out.println("Enter the update for has anthropomorphic Characters(True/False)");
                 String anthropomorphicCharacters = scanner.nextLine();
-                if (!anthropomorphicCharacters.equalsIgnoreCase("true") && ! anthropomorphicCharacters.equalsIgnoreCase("false")) {
+                while (!anthropomorphicCharacters.equalsIgnoreCase("true") && !anthropomorphicCharacters.equalsIgnoreCase("false")) {
                     System.out.println("The input is invalid, please enter (true/false)");
                     anthropomorphicCharacters = scanner.nextLine();
                 }
@@ -125,7 +124,7 @@ public class FableCollectionService {
         }
 
         for (int i = 0; i < fableCollectionBookList.size(); i++) {
-            if (fableCollectionBookList.get(i).equals(updatedBook)) {
+            if (fableCollectionBookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 fableCollectionBookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;

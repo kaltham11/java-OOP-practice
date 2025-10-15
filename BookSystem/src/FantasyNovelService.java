@@ -11,8 +11,7 @@ public class FantasyNovelService {
             System.out.println("Please, Enter The International Standard Book Number(ISBN) of book");
             String iSBN = scanner.nextLine();
             while (HelperUtils.isNull(iSBN) || HelperUtils.checkIfStrIsBlankOrEmpty(iSBN) || checkIfBookISBNIsExit(iSBN)) {
-                System.out.println("This Book ISBN is already exits in out Records," +
-                        "Please Enter another ISBN");
+                System.out.println("Invalid Input, please enter again");
                 iSBN = scanner.nextLine();
             }
             fantasyNovelBook.setiSBN(iSBN);
@@ -99,13 +98,14 @@ public class FantasyNovelService {
                     case 3 -> {
                         System.out.println("Enter the update for mythical Creature Presence(True/False)");
                         String mythicalCreaturePresence = scanner.nextLine();
-                        if (mythicalCreaturePresence.equalsIgnoreCase("true") || mythicalCreaturePresence.equalsIgnoreCase("false")) {
-                            Boolean isMythicalCreaturePresence = Boolean.parseBoolean(mythicalCreaturePresence);
-                            selectedBook.setMythicalCreaturePresence(isMythicalCreaturePresence);
-                            System.out.println("mythical Creature Presence updated successfully");
+                        while (!mythicalCreaturePresence.equalsIgnoreCase("true") && !mythicalCreaturePresence.equalsIgnoreCase("false")) {
+                            System.out.println("The input is invalid, please enter (true/false)");
+                            mythicalCreaturePresence = scanner.nextLine();
                         }
-                        System.out.println("The input is invalid, please enter (true/false)");
-                        mythicalCreaturePresence = scanner.nextLine();
+                        Boolean isMythicalCreaturePresence = Boolean.parseBoolean(mythicalCreaturePresence);
+                        selectedBook.setMythicalCreaturePresence(isMythicalCreaturePresence);
+                        System.out.println("mythical Creature Presence updated successfully");
+
 
                     }
 
@@ -126,7 +126,7 @@ public class FantasyNovelService {
         }
 
         for (int i = 0; i < fantasyNovelbookList.size(); i++) {
-            if (fantasyNovelbookList.get(i).equals(updatedBook)) {
+            if (fantasyNovelbookList.get(i).getiSBN().equals(updatedBook.getiSBN())) {
                 fantasyNovelbookList.set(i, updatedBook);
                 System.out.println("Book updated successfully.");
                 return;
